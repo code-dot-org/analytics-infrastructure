@@ -11,10 +11,8 @@ This document describes how to set up your workstation to contribute to `analyti
 
     ```
     python --version # --> python ^3.10.0
-    pip -m pip --verison # --> pip ^22.0.4
+    python -m pip --verison # --> pip ^22.0.4
     ```
-
-    > TODO: python virtual environments?
 
     <details>
     <summary>MacOS X</summary>
@@ -25,31 +23,13 @@ This document describes how to set up your workstation to contribute to `analyti
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
         ```
 
-    2. Install and set up [pyenv]('https://github.com/pyenv/pyenv') to manage different versions of Python.
+    2. Install Python 3.10.0:
 
         ```
-        brew install pyenv
+        brew install python
         ```
 
-    3. Install Python 3.10.0:
-
-        ```
-        pyenv install 3.10.0
-        ```
-
-    4. Add the following to your `.bash_profile`. (more details in [their documentation](https://github.com/pyenv/pyenv#basic-github-checkout)):
-
-        ```
-        eval "$(pyenv init --path)"
-        ```
-
-    5. Set your global Python version:
-
-        ```
-        pyenv global 3.10.0
-        ```
-
-    5. Install pip:
+    3. Install/Upgrade pip:
 
         ```
         python -m ensurepip --upgrade
@@ -61,22 +41,18 @@ This document describes how to set up your workstation to contribute to `analyti
     <summary>Windows</summary>
 
     1. Install Python3: [Latest Python 3 Release](https://www.python.org/downloads/windows/)
-    2. Install and set up [pyenv]('https://github.com/pyenv-win/pyenv-win#installation') to manage different versions of Python. In Powershell or Git Bash:
-        ```
-        pip install pyenv-win --target $HOME\\.pyenv
-        ```
 
-    3. Set your global Python version (and install if necessary):
+    2. Install/Upgrade pip:
 
         ```
-        pyenv global 3.10.0
+        python -m ensurepip --upgrade
         ```
-
     </details>
 
-
 2. Clone the `code-dot-org/analytics-infrastructure` repo using SSH.
+
 3. `cd analytics-infrastructure`
+
 4. Install app dependencies:
     ```
     pip install -r requirements.txt
