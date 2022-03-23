@@ -12,6 +12,7 @@ This document describes how to set up your workstation to contribute to `analyti
     ```
     python --version # --> python ^3.10.0
     python -m pip --verison # --> pip ^22.0.4
+    poetry --version # --> Poetry ^1.1.13
     ```
 
     <details>
@@ -35,6 +36,12 @@ This document describes how to set up your workstation to contribute to `analyti
         python -m ensurepip --upgrade
         ```
 
+    4. Install poetry:
+
+        ```
+        curl -SSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+        ```
+
     </details>
 
     <details>
@@ -47,6 +54,13 @@ This document describes how to set up your workstation to contribute to `analyti
         ```
         python -m ensurepip --upgrade
         ```
+
+    3. Install poetry (bash):
+
+    ```
+    curl -SSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+    ```
+
     </details>
 
 2. Clone the `code-dot-org/analytics-infrastructure` repo using SSH.
