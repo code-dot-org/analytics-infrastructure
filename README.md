@@ -69,5 +69,5 @@ This document describes how to set up your workstation to contribute to `analyti
 
 4. Install app dependencies:
     ```
-    pip install -r requirements.txt
+    poetry install
     ```
