@@ -10,8 +10,7 @@ This document describes how to set up your workstation to contribute to `analyti
 1. Install + Confirm OS-specific prerequisites
 
     ```
-    python --version # --> python ^3.10.0
-    python -m pip --verison # --> pip ^22.0.4
+    python --version # --> python ^3.9.0
     poetry --version # --> Poetry ^1.1.13
     ```
 
@@ -30,13 +29,7 @@ This document describes how to set up your workstation to contribute to `analyti
         brew install python
         ```
 
-    3. Install/Upgrade pip:
-
-        ```
-        python -m ensurepip --upgrade
-        ```
-
-    4. Install poetry:
+    3. Install [Poetry](https://python-poetry.org/docs/):
 
         ```
         curl -SSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
@@ -49,13 +42,7 @@ This document describes how to set up your workstation to contribute to `analyti
 
     1. Install Python3: [Latest Python 3 Release](https://www.python.org/downloads/windows/)
 
-    2. Install/Upgrade pip:
-
-        ```
-        python -m ensurepip --upgrade
-        ```
-
-    3. Install poetry (bash):
+    2. Install [Poetry](https://python-poetry.org/docs/)(bash):
 
     ```
     curl -SSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
@@ -70,4 +57,9 @@ This document describes how to set up your workstation to contribute to `analyti
 4. Install app dependencies:
     ```
     poetry install
+    ```
+
+5. Run the app:
+    ```
+    poetry run python hello-world.py
     ```
