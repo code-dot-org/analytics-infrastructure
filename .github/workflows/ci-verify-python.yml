@@ -22,7 +22,9 @@ jobs:
           max-line-length: "100"
 
       - name: Install python dependencies
+        working-directory: src
         run: poetry install
 
       - name: Run sample python script
+        working-directory: src
         run: poetry run python hello-world.py
