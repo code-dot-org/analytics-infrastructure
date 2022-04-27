@@ -3,7 +3,7 @@ FROM python:3
 WORKDIR /src
 
 # Install Poetry
-RUN pip install 'poetry==1'
+RUN pip install --no-cache-dir  'poetry==1'
 
 # Copy only requirements to cache them in docker layer
 COPY src/poetry.lock src/pyproject.toml /src/
