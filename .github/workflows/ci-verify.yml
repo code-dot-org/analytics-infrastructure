@@ -1,4 +1,4 @@
-name: CI Verify Python
+name: CI Verify
 on:
   pull_request:
     branches:
