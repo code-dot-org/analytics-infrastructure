@@ -5,4 +5,5 @@ runs:
       with:
         dockerfile: Dockerfile
     - name: Build the Docker image
+      shell: bash
       run: docker build .
