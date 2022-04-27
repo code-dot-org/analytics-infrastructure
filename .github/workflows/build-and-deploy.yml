@@ -9,5 +9,7 @@ jobs:
       - uses: abatilo/actions-poetry@v2.0.0
       - name: View poetry --help
         run: poetry --help
+      - name: Install python dependencies
+        run: poetry install
       - name: Run python script with poetry
         run: poetry run python hello-world.py
