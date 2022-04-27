@@ -1,4 +1,4 @@
-name: CI Verify Dockerfile
+name: CI Verify Docker
 on:
   pull_request:
     branches:
@@ -6,10 +6,12 @@ on:
     paths:
       - 'Dockerfile'
 jobs:
-  verify-dockerfile:
+  verify-docker:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2 
       - uses: hadolint/hadolint-action@v2.0.0
         with:
           dockerfile: Dockerfile
+      - name: Build the Docker image
+        run: docker build .
