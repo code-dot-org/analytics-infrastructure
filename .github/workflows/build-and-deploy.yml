@@ -2,13 +2,7 @@ name: Build and Deploy
 on: [push]
 jobs:
   ci:
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: [3.6, 3.7, 3.8]
-        poetry-version: [1.0, 1.1.11]
-        os: [ubuntu-18.04, macos-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -20,3 +14,5 @@ jobs:
           poetry-version: ${{ matrix.poetry-version }}
       - name: View poetry --help
         run: poetry --help
+      - name: Run python script with poetry
+        run: poetry run src/hello-world.py
