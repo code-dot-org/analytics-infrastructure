@@ -1,3 +1,3 @@
-import redshift_connector
+# import redshift_connector
 
 print("Howdy, partner!")
