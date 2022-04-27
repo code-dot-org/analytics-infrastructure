@@ -1,5 +1,8 @@
-name: Build and Deploy
-on: [push]
+name: CI Verify Python
+on:
+  push:
+    paths:
+      - '**.py'
 jobs:
   ci:
     runs-on: ubuntu-latest
