@@ -6,11 +6,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v3
-        with:
-          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
-      - name: Run image
         uses: abatilo/actions-poetry@v2.0.0
-        with:
-          poetry-version: ${{ matrix.poetry-version }}
       - name: View poetry --help
         run: poetry --help
+      - name: Run python script with poetry
+        run: poetry run python src/hello-world.py
