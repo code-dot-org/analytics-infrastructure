@@ -10,4 +10,4 @@ jobs:
       - name: View poetry --help
         run: poetry --help
       - name: Run python script with poetry
-        run: poetry run python src/hello-world.py
+        run: poetry run python hello-world.py
