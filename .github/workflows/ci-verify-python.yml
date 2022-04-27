@@ -10,6 +10,10 @@ on:
 jobs:
   verify-python:
     runs-on: ubuntu-latest
+    env:
+      REDSHIFT_USERNAME: dbowie
+      REDSHIFT_PASSWORD: z1ggY
+      REDSHIFT_HOSTNAME: example.com
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v3
