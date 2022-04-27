@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v3
-        uses: abatilo/actions-poetry@v2.0.0
+      - uses: abatilo/actions-poetry@v2.0.0
       - name: View poetry --help
         run: poetry --help
       - name: Run python script with poetry
