@@ -31,4 +31,4 @@ jobs:
 
       - name: Run sample python script
         working-directory: src
-        run: poetry run python hello-world.py
+        run: poetry run python test.py
