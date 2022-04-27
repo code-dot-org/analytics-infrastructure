@@ -1,4 +1,4 @@
-name: CI Verify Dockerfile
+name: CI Deploy
 # on:
 #   push:
 #     branches:
@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
-  docker:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS credentials
