@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv, find_dotenv
 
+
 class Config:
 
     REDSHIFT_USERNAME = ""
@@ -16,7 +17,7 @@ class Config:
         ]
 
         for i, config_var in enumerate(config_vars):
-            # check to see if this was passed in as an environment variable first
+            # was it passed in as an environment variable?
             value = os.getenv(config_var)
 
             # fall back to .env file if not
