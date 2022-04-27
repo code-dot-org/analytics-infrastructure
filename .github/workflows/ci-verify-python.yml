@@ -1,0 +1,28 @@
+name: CI Verify Python
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '**.py'
+      - 'pyproject.toml'
+      - 'poetry.lock'
+jobs:
+  verify-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v3
+      - uses: abatilo/actions-poetry@v2.0.0
+
+      - name: lint all python scripts
+        uses: py-actions/flake8@v2
+        with:
+          path: "src"
+          max-line-length: "100"
+
+      - name: Install python dependencies
+        run: poetry install
+
+      - name: Run sample python script
+        run: poetry run python hello-world.py
