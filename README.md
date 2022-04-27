@@ -54,12 +54,32 @@ This document describes how to set up your workstation to contribute to `analyti
 
 3. `cd analytics-infrastructure`
 
-4. Install app dependencies:
+4. `cd src`
+
+5. Install app dependencies:
     ```
     poetry install
     ```
 
-5. Run the app:
+6. Run the app:
     ```
     poetry run python hello-world.py
     ```
+
+## Set up with Docker
+
+If you have docker installed, you can run the following to run any of the python scripts.
+
+The following **docker** command will **build** an image **t**agged as **etl-runner** using the Dockerfile in the current directory (aka '.').
+
+```
+docker build -t etl-runner .
+```
+
+Then you can **run** the image tagged **etl-runner**, optionally passing in the script name with the following command
+
+```
+docker run --rm etl-runner
+# or
+docker run --rm etl-runner hello-world.py
+```
