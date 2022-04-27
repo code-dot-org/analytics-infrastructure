@@ -1,5 +1,5 @@
 # import os
-# import redshift_connector
+import redshift_connector
 from config import Config
 
 CONFIG = Config()
