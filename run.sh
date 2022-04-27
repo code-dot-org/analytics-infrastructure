@@ -8,5 +8,6 @@ fi
 # This version of the run command will volume mount the src folder, so you can run scripts modified or added since you last ran `docker build`
 echo Running Docker image...
 echo -------------------------------------------
-docker run --rm -v "$(pwd)"/src:/src etl-runner $1
-
+docker run --rm \
+  -v "$(pwd)"/src:/src \
+  etl-runner $1
