@@ -6,18 +6,20 @@ on:
     paths:
       - '**.py'
 jobs:
-  ci:
+  verify-python:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v3
       - uses: abatilo/actions-poetry@v2.0.0
 
-      - name: Install python dependencies
-        run: poetry install
+      # - name: Install python dependencies
+      #   run: poetry install
 
-      - name: Run sample python script with poetry
-        run: poetry run python hello-world.py
+      # - name: Run sample python script with poetry
+      #   run: poetry run python hello-world.py
 
       - name: flake8 Lint
         uses: py-actions/flake8@v2
+        with:
+          path: "src"
