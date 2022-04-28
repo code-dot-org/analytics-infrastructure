@@ -47,11 +47,11 @@ Resources:
                   - iam:CreateRole
                   - iam:PutRolePermissionsBoundary
                   # Managed policies attached to a Role
-                  # - iam:AttachRolePolicy
-                  # - iam:DetachRolePolicy
+                  - iam:AttachRolePolicy
+                  - iam:DetachRolePolicy
                   # Inline policies embedded in a Role
-                  # - iam:PutRolePolicy
-                  # - iam:DeleteRolePolicy
+                  - iam:PutRolePolicy
+                  - iam:DeleteRolePolicy
                 NotResource: !Sub "arn:aws:iam::${AWS::AccountId}:role/admin/*"
                 # Require DevPermissions boundary on all Roles, e.g.:
                 # PermissionsBoundary: !ImportValue IAM-DevPermissions
