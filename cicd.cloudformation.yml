@@ -20,6 +20,10 @@ Resources:
             Statement:
               - Effect: Allow
                 Action:
+                  - ecr:GetAuthorizationToken
+                Resource: "*"
+              - Effect: Allow
+                Action:
                   # TODO slim this copy of poweruser down
                   - ecr:GetDownloadUrlForLayer
                   - ecr:BatchGetImage
@@ -29,7 +33,6 @@ Resources:
                   - ecr:UploadLayerPart
                   - ecr:CompleteLayerUpload
 
-                  - ecr:GetAuthorizationToken
                   - ecr:GetRepositoryPolicy
                   - ecr:DescribeRepositories
                   - ecr:ListImages
