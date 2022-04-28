@@ -32,6 +32,13 @@ Resources:
           Image: !Ref Image
           Command:
             - test.py
+          Environment:
+            - Name: REDSHIFT_USERNAME
+              Value: hackerman
+            - Name: REDSHIFT_PASSWORD
+              Value: hunter2
+            - Name: REDSHIFT_HOSTNAME
+              Value: example.com
           LogConfiguration:
             LogDriver: awslogs
             Options:
