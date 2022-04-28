@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: Core infrastructure for analytics warehouse etl Resources
+
+Parameters:
+  Image:
+    Type: String
+    Description: The ARN of the container image to deploy
+
+Resources:
+  ECSCluster:
+    Type: 'AWS::ECS::Cluster'
+    Properties:
+      CapacityProviders:
+        - FARGATE
+      ClusterName: !Sub "${AWS::StackName}-cluster"
+
+  CloudwatchLogsGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "ECSLogGroup-${AWS::StackName}"
+      RetentionInDays: 14
+
+  ECSTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    DependsOn:
+      - ECSCluster
+    Properties: 
+      Family: !Sub "${AWS::StackName}-task"
+      ContainerDefinitions: 
+        - Name: analytics-task
+          Image: !Ref Image
+          Command: test.py
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group:  !Ref CloudwatchLogsGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix:  !Sub "${AWS::StackName}-task"
+      Cpu: 512
+      Memory: 256
+      ExecutionRoleArn: !Ref ExecutionRole
+      NetworkMode: awsvpc
+      RuntimePlatform: 
+        OperatingSystemFamily: LINUX
+
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: ['sts:AssumeRole']
+            Effect: Allow
+            Principal: {Service: [ecs-tasks.amazonaws.com]}
+      PermissionsBoundary: !ImportValue IAM-DevPermissions
+      ManagedPolicyArns:
+        # AWS-managed policy for executing an ECS task
+        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
