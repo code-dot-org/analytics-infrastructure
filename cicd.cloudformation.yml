@@ -39,6 +39,8 @@ Resources:
                   - cloudformation:UpdateStack
                   - cloudformation:DeleteStack
                   - cloudformation:CreateChangeSet
+                  - cloudformation:DeleteChangeSet
+                  - cloudformation:DescribeChangeSet
                 Resource:
                   - !Sub arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/analytics/*
               - Effect: Allow
