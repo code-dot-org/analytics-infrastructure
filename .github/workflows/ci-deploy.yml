@@ -43,4 +43,5 @@ jobs:
         with:
           name: analytics
           template: app.cloudformation.yml
-          parameter-overrides: "Image=${{ env.ECR_REGISTRY }}${{ env.ECR_REPOSITORY }}${{ github.sha }}"
+          parameter-overrides: "Image=165336972514.dkr.ecr.us-east-1.amazonaws.com/analytics-cicd:6d8274fce1d0c9fbe64a502d6d2d8a70218c8531"
+          # parameter-overrides: "Image=${{ env.ECR_REGISTRY }}${{ env.ECR_REPOSITORY }}${{ github.sha }}"
