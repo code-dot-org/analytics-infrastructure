@@ -8,7 +8,7 @@ Parameters:
     Description: The ARN of the container image to deploy
 
 Resources:
-  ECSCluster:
+  EcsCluster:
     Type: 'AWS::ECS::Cluster'
     Properties:
       CapacityProviders:
@@ -24,7 +24,7 @@ Resources:
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
     DependsOn:
-      - ECSCluster
+      - EcsCluster
     Properties: 
       Family: !Sub "${AWS::StackName}-task"
       ContainerDefinitions: 
