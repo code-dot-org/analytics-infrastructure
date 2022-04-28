@@ -15,11 +15,11 @@ Resources:
         - FARGATE
       ClusterName: !Sub "${AWS::StackName}-cluster"
 
-  # CloudwatchLogsGroup:
-  #   Type: AWS::Logs::LogGroup
-  #   Properties:
-  #     LogGroupName: !Sub "ECSLogGroup-${AWS::StackName}"
-  #     RetentionInDays: 14
+  CloudwatchLogsGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "ECSLogGroup-${AWS::StackName}"
+      RetentionInDays: 14
 
   # ECSTaskDefinition:
   #   Type: AWS::ECS::TaskDefinition
