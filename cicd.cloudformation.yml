@@ -56,6 +56,10 @@ Resources:
                   - ecs:RegisterTaskDefinition
                   - ecs:DeregisterTaskDefinition
                 Resource: '*'
+              - Allow:
+                Action:
+                  - logs:CreateLogGroup
+                Resource: '*'
               - Effect: Allow
                 Action:
                   # AWS::IAM::Role
