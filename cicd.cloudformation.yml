@@ -33,6 +33,7 @@ Resources:
                   - ecr:UploadLayerPart
                   - ecr:CompleteLayerUpload
 
+                  # might not need any of these, remove once we have working POC
                   - ecr:GetRepositoryPolicy
                   - ecr:DescribeRepositories
                   - ecr:ListImages
