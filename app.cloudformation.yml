@@ -30,7 +30,8 @@ Resources:
       ContainerDefinitions: 
         - Name: analytics-task
           Image: !Ref Image
-          Command: test.py
+          Command:
+            - test.py
           LogConfiguration:
             LogDriver: awslogs
             Options:
