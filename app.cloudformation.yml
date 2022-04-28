@@ -78,5 +78,5 @@ Resources:
             LaunchType: EC2
             TaskDefinitionArn: !Ref TaskDefinition
             TaskCount: 1
-          RoleArn: !GetAdd ExecutionRole.Arn
+          RoleArn: !GetAtt ExecutionRole.Arn
           Arn: !GetAtt EcsCluster.Arn
