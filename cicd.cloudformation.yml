@@ -24,7 +24,6 @@ Resources:
                 Resource: "*"
               - Effect: Allow
                 Action:
-                  # TODO slim this copy of poweruser down
                   - ecr:GetDownloadUrlForLayer
                   - ecr:BatchGetImage
                   - ecr:BatchCheckLayerAvailability
@@ -33,6 +32,11 @@ Resources:
                   - ecr:UploadLayerPart
                   - ecr:CompleteLayerUpload
                 Resource: !GetAtt EcrRepository.Arn
+              - Effect: Allow
+                Action:
+                  - cloudformation:DescribeStacks
+                Resource:
+                  - !Sub arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/analytics/*
 
 Outputs:
   AnalyticsEcrRepositoryName:
