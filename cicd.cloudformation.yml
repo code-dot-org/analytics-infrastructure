@@ -43,6 +43,21 @@ Resources:
                   - !Sub arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/analytics/*
               - Effect: Allow
                 Action:
+                  - ecs:DescribeClusters
+                  - ecs:CreateCluster
+                  - ecs:DeleteCluster
+                  - ecs:CreateTaskSet
+                  - ecs:DeleteTaskSet
+                  - ecs:DescribeTasks
+                  - ecs:DescribeTaskSets
+                  - ecs:ListClusters
+                  - ecs:ListTaskDefinitions
+                  - ecs:ListTasks
+                  - ecs:RegisterTaskDefinition
+                  - ecs:DeregisterTaskDefinition
+                Resource: '*'
+              - Effect: Allow
+                Action:
                   # AWS::IAM::Role
                   - iam:CreateRole
                   - iam:PutRolePermissionsBoundary
