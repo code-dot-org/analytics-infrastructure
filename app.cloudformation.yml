@@ -52,7 +52,7 @@ Resources:
           - Action: ['sts:AssumeRole']
             Effect: Allow
             Principal: {Service: [ecs-tasks.amazonaws.com]}
-      PermissionsBoundary: !ImportValue IAM-DevPermissions
+      # PermissionsBoundary: !ImportValue IAM-DevPermissions
       ManagedPolicyArns:
         # AWS-managed policy for executing an ECS task
         - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
