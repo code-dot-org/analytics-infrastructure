@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: Cicd resources for analytics stack
+
+Resources:
+  EcrRepository:
+    Type: AWS::ECR::Repository
+    Properties: 
+      RepositoryName: !Sub ${AWS::StackName}
+  
+  # This user will have a key and secret manually generated and saved to GitHub
+  # Actions Secrets for this repository. These secrets are referenced in the
+  # "ci-deploy.yml" workflow. 
+  GitHubActionsDeployer:
+    Type: AWS::IAM::User
+    Properties:
+      Policies:
+        - PolicyName: EcrRepositoryAccess
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  # TODO slim this copy of poweruser down
+                  - ecr:GetDownloadUrlForLayer
+                  - ecr:BatchGetImage
+                  - ecr:BatchCheckLayerAvailability
+                  - ecr:PutImage
+                  - ecr:InitiateLayerUpload
+                  - ecr:UploadLayerPart
+                  - ecr:CompleteLayerUpload
+
+                  - ecr:GetAuthorizationToken
+                  - ecr:GetRepositoryPolicy
+                  - ecr:DescribeRepositories
+                  - ecr:ListImages
+                  - ecr:DescribeImages
+                  - ecr:GetLifecyclePolicy
+                  - ecr:GetLifecyclePolicyPreview
+                  - ecr:ListTagsForResource
+                  - ecr:DescribeImageScanFindings
+                Resource: !GetAtt EcrRepository.Arn
+
+Outputs:
+  AnalyticsEcrRepositoryName:
+    Description: ECR Repository for analytics docker images
+    Value: !Ref EcrRepository
+    Export: {Name: AnalyticsEcrRepositoryName}
