@@ -35,6 +35,8 @@ Resources:
               - Effect: Allow
                 Action:
                   - cloudformation:DescribeStacks
+                  - cloudformation:CreateStack
+                  - cloudformation:UpdateStack
                 Resource:
                   - !Sub arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/analytics/*
 
