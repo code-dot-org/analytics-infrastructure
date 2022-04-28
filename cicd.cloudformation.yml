@@ -63,6 +63,7 @@ Resources:
                 Action:
                   - logs:CreateLogGroup
                   - logs:PutRetentionPolicy
+                  - logs:DeleteLogGroup
                 Resource: '*'
               - Effect: Allow
                 Action:
