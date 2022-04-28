@@ -17,7 +17,6 @@ jobs:
       ECR_REPOSITORY: analytics-cicd
     steps:
       - uses: actions/checkout@v2
-      - run: echo This is where I would deploy the code
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
