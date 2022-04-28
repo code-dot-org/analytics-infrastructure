@@ -56,7 +56,7 @@ Resources:
                   - ecs:RegisterTaskDefinition
                   - ecs:DeregisterTaskDefinition
                 Resource: '*'
-              - Allow:
+              - Effect: Allow
                 Action:
                   - logs:CreateLogGroup
                 Resource: '*'
