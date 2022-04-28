@@ -39,6 +39,7 @@ Resources:
                   - cloudformation:UpdateStack
                   - cloudformation:DeleteStack
                   - cloudformation:CreateChangeSet
+                  - cloudformation:ExecuteChangeSet
                   - cloudformation:DeleteChangeSet
                   - cloudformation:DescribeChangeSet
                 Resource:
