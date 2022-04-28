@@ -8,49 +8,49 @@ Parameters:
     Description: The ARN of the container image to deploy
 
 Resources:
-  EcsCluster:
-    Type: 'AWS::ECS::Cluster'
-    Properties:
-      CapacityProviders:
-        - FARGATE
-      ClusterName: !Sub "${AWS::StackName}-cluster"
+  # EcsCluster:
+  #   Type: 'AWS::ECS::Cluster'
+  #   Properties:
+  #     CapacityProviders:
+  #       - FARGATE
+  #     ClusterName: !Sub "${AWS::StackName}-cluster"
 
-  CloudwatchLogsGroup:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub "ECSLogGroup-${AWS::StackName}"
-      RetentionInDays: 14
+  # CloudwatchLogsGroup:
+  #   Type: AWS::Logs::LogGroup
+  #   Properties:
+  #     LogGroupName: !Sub "ECSLogGroup-${AWS::StackName}"
+  #     RetentionInDays: 14
 
-  TaskDefinition:
-    Type: AWS::ECS::TaskDefinition
-    DependsOn:
-      - EcsCluster
-    Properties: 
-      Family: !Sub "${AWS::StackName}-task"
-      ContainerDefinitions: 
-        - Name: analytics-task
-          Image: !Ref Image
-          Command:
-            - test.py
-          Environment:
-            - Name: REDSHIFT_USERNAME
-              Value: hackerman
-            - Name: REDSHIFT_PASSWORD
-              Value: hunter2
-            - Name: REDSHIFT_HOSTNAME
-              Value: example.com
-          LogConfiguration:
-            LogDriver: awslogs
-            Options:
-              awslogs-group:  !Ref CloudwatchLogsGroup
-              awslogs-region: !Ref AWS::Region
-              awslogs-stream-prefix:  !Sub "${AWS::StackName}-task"
-      Cpu: 256
-      Memory: 512
-      ExecutionRoleArn: !Ref ExecutionRole
-      NetworkMode: awsvpc
-      RuntimePlatform: 
-        OperatingSystemFamily: LINUX
+  # TaskDefinition:
+  #   Type: AWS::ECS::TaskDefinition
+  #   DependsOn:
+  #     - EcsCluster
+  #   Properties: 
+  #     Family: !Sub "${AWS::StackName}-task"
+  #     ContainerDefinitions: 
+  #       - Name: analytics-task
+  #         Image: !Ref Image
+  #         Command:
+  #           - test.py
+  #         Environment:
+  #           - Name: REDSHIFT_USERNAME
+  #             Value: hackerman
+  #           - Name: REDSHIFT_PASSWORD
+  #             Value: hunter2
+  #           - Name: REDSHIFT_HOSTNAME
+  #             Value: example.com
+  #         LogConfiguration:
+  #           LogDriver: awslogs
+  #           Options:
+  #             awslogs-group:  !Ref CloudwatchLogsGroup
+  #             awslogs-region: !Ref AWS::Region
+  #             awslogs-stream-prefix:  !Sub "${AWS::StackName}-task"
+  #     Cpu: 256
+  #     Memory: 512
+  #     ExecutionRoleArn: !Ref ExecutionRole
+  #     NetworkMode: awsvpc
+  #     RuntimePlatform: 
+  #       OperatingSystemFamily: LINUX
 
   ExecutionRole:
     Type: AWS::IAM::Role
@@ -65,18 +65,18 @@ Resources:
         # AWS-managed policy for executing an ECS task
         - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
   
-  TaskSchedule:
-    Type: AWS::Events::Rule
-    Properties:
-      Description: Trigger analytics task on a schedule
-      Name: !Sub "${AWS::StackName}-task-every-five-minutes"
-      ScheduleExpression: "cron(*/5 * * * )"
-      State: ENABLED
-      Targets:
-        - Id: !Sub "${AWS::StackName}-event-rule-targetId"
-          EcsParameters:
-            LaunchType: EC2
-            TaskDefinitionArn: !Ref TaskDefinition
-            TaskCount: 1
-          RoleArn: !GetAtt ExecutionRole.Arn
-          Arn: !GetAtt EcsCluster.Arn
+  # TaskSchedule:
+  #   Type: AWS::Events::Rule
+  #   Properties:
+  #     Description: Trigger analytics task on a schedule
+  #     Name: !Sub "${AWS::StackName}-task-every-five-minutes"
+  #     ScheduleExpression: "cron(*/5 * * * )"
+  #     State: ENABLED
+  #     Targets:
+  #       - Id: !Sub "${AWS::StackName}-event-rule-targetId"
+  #         EcsParameters:
+  #           LaunchType: EC2
+  #           TaskDefinitionArn: !Ref TaskDefinition
+  #           TaskCount: 1
+  #         RoleArn: !GetAtt ExecutionRole.Arn
+  #         Arn: !GetAtt EcsCluster.Arn
