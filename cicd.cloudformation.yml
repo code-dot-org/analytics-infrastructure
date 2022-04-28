@@ -59,11 +59,13 @@ Resources:
               - Effect: Allow
                 Action:
                   - logs:CreateLogGroup
+                  - logs:PutRetentionPolicy
                 Resource: '*'
               - Effect: Allow
                 Action:
                   # AWS::IAM::Role
                   - iam:CreateRole
+                  - iam:DeleteRole
                   - iam:PutRolePermissionsBoundary
                   # Managed policies attached to a Role
                   - iam:AttachRolePolicy
