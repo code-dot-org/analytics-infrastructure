@@ -37,8 +37,27 @@ Resources:
                   - cloudformation:DescribeStacks
                   - cloudformation:CreateStack
                   - cloudformation:UpdateStack
+                  - cloudformation:DeleteStack
+                  - cloudformation:CreateChangeSet
                 Resource:
                   - !Sub arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/analytics/*
+              - Effect: Allow
+                Action:
+                  # AWS::IAM::Role
+                  - iam:CreateRole
+                  - iam:PutRolePermissionsBoundary
+                  # Managed policies attached to a Role
+                  # - iam:AttachRolePolicy
+                  # - iam:DetachRolePolicy
+                  # Inline policies embedded in a Role
+                  # - iam:PutRolePolicy
+                  # - iam:DeleteRolePolicy
+                NotResource: !Sub "arn:aws:iam::${AWS::AccountId}:role/admin/*"
+                # Require DevPermissions boundary on all Roles, e.g.:
+                # PermissionsBoundary: !ImportValue IAM-DevPermissions
+                # Condition:
+                #   StringEquals:
+                #     iam:PermissionsBoundary: !Ref DevPermissions
 
 Outputs:
   AnalyticsEcrRepositoryName:
