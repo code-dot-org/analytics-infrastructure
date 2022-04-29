@@ -86,7 +86,8 @@ Resources:
                 Resource:
                   - !Sub arn:aws:iam::${AWS::AccountId}:role/analytics-ExecutionRole-*
 
-  AnalyticsRedshiftSecret:
-    Type: AWS::SecretsManager::Secret
-    Properties:
-      Description: Redshift credentials for analytics tasks
+  # TODO: make a secret and sync it with redshift for automatic resetting
+  # AnalyticsRedshiftSecret:
+  #   Type: AWS::SecretsManager::Secret
+  #   Properties:
+  #     Description: Redshift credentials for analytics tasks
