@@ -1,10 +1,12 @@
 name: CI Verify Docker
+
 on:
   pull_request:
     branches:
       - main
     paths:
       - 'Dockerfile'
+
 jobs:
   verify-docker:
     runs-on: ubuntu-latest
