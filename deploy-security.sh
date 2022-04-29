@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash +e
 
 # Deploys AWS IAM-permissions CloudFormation stack.
 # Requires admin access to create/modify IAM roles.

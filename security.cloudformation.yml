@@ -85,3 +85,8 @@ Resources:
                   - "iam:PassRole"
                 Resource:
                   - !Sub arn:aws:iam::${AWS::AccountId}:role/analytics-ExecutionRole-*
+
+  AnalyticsRedshiftSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: Redshift credentials for analytics tasks
