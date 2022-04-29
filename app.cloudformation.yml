@@ -21,6 +21,19 @@ Resources:
       LogGroupName: !Sub "ECSLogGroup-${AWS::StackName}"
       RetentionInDays: 14
 
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: ['sts:AssumeRole']
+            Effect: Allow
+            Principal: {Service: [ecs-tasks.amazonaws.com]}
+      # PermissionsBoundary: !ImportValue IAM-DevPermissions
+      ManagedPolicyArns:
+        # AWS-managed policy for executing an ECS task
+        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
     DependsOn:
@@ -47,23 +60,10 @@ Resources:
               awslogs-stream-prefix:  !Sub "${AWS::StackName}-task"
       Cpu: 256
       Memory: 512
-      ExecutionRoleArn: !Ref ExecutionRole
+      ExecutionRoleArn: !GetAtt ExecutionRole.Arn
       NetworkMode: awsvpc
       RuntimePlatform: 
         OperatingSystemFamily: LINUX
-
-  ExecutionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Statement:
-          - Action: ['sts:AssumeRole']
-            Effect: Allow
-            Principal: {Service: [ecs-tasks.amazonaws.com]}
-      # PermissionsBoundary: !ImportValue IAM-DevPermissions
-      ManagedPolicyArns:
-        # AWS-managed policy for executing an ECS task
-        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
   
   # This isn't working yet, uncomment to see errors in cloudformation stack update
   # TaskSchedule:
