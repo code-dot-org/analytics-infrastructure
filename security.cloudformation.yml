@@ -10,7 +10,7 @@ Resources:
     Type: AWS::IAM::User
     Properties:
       Policies:
-        - PolicyName: EcrRepositoryAccess
+        - PolicyName: AnalyticsDeployerAccess
           PolicyDocument:
             Statement:
               - Effect: Allow
@@ -39,6 +39,7 @@ Resources:
                   - cloudformation:DescribeChangeSet
                 Resource:
                   - !Sub arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/analytics/*
+                  - !Sub arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/analytics-cicd/*
               - Effect: Allow
                 Action:
                   - ecs:DescribeClusters
