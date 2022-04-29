@@ -31,7 +31,7 @@ jobs:
         with:
           name: analytics-cicd
           template: cicd.cloudformation.yml
-          no-fail-on-empty-changeset: true
+          no-fail-on-empty-changeset: 1
 
       - name: Login to Amazon ECR
         id: login-ecr
