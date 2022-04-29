@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: Cicd resources for analytics stack
+
+Resources:  
+  # This user will have a key and secret manually generated and saved to GitHub
+  # Actions Secrets for this repository. These secrets are referenced in the
+  # "ci-deploy.yml" workflow. 
+  GitHubActionsDeployer:
+    Type: AWS::IAM::User
+    Properties:
+      Policies:
+        - PolicyName: EcrRepositoryAccess
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ecr:GetAuthorizationToken
+                Resource: "*"
+              - Effect: Allow
+                Action:
+                  - ecr:GetDownloadUrlForLayer
+                  - ecr:BatchGetImage
+                  - ecr:BatchCheckLayerAvailability
+                  - ecr:PutImage
+                  - ecr:InitiateLayerUpload
+                  - ecr:UploadLayerPart
+                  - ecr:CompleteLayerUpload
+                Resource: !Sub arn:aws:ecr:${AWS::Region}:${AWS::AccountId}:repository/analytics-cicd
+              - Effect: Allow
+                Action:
+                  - cloudformation:DescribeStacks
+                  - cloudformation:CreateStack
+                  - cloudformation:UpdateStack
+                  - cloudformation:DeleteStack
+                  - cloudformation:CreateChangeSet
+                  - cloudformation:ExecuteChangeSet
+                  - cloudformation:DeleteChangeSet
+                  - cloudformation:DescribeChangeSet
+                Resource:
+                  - !Sub arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/analytics/*
+              - Effect: Allow
+                Action:
+                  - ecs:DescribeClusters
+                  - ecs:CreateCluster
+                  - ecs:DeleteCluster
+                  - ecs:CreateTaskSet
+                  - ecs:DeleteTaskSet
+                  - ecs:DescribeTasks
+                  - ecs:DescribeTaskSets
+                  - ecs:ListClusters
+                  - ecs:ListTaskDefinitions
+                  - ecs:ListTasks
+                  - ecs:RegisterTaskDefinition
+                  - ecs:DeregisterTaskDefinition
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:PutRetentionPolicy
+                  - logs:DeleteLogGroup
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  # AWS::IAM::Role
+                  - iam:GetRole
+                  - iam:CreateRole
+                  - iam:DeleteRole
+                  - iam:PutRolePermissionsBoundary
+                  # Managed policies attached to a Role
+                  - iam:AttachRolePolicy
+                  - iam:DetachRolePolicy
+                  # Inline policies embedded in a Role
+                  - iam:PutRolePolicy
+                  - iam:DeleteRolePolicy
+                NotResource: !Sub "arn:aws:iam::${AWS::AccountId}:role/admin/*"
+                # Require DevPermissions boundary on all Roles, e.g.:
+                # PermissionsBoundary: !ImportValue IAM-DevPermissions
+                # Condition:
+                #   StringEquals:
+                #     iam:PermissionsBoundary: !Ref DevPermissions
+              - Effect: Allow
+                Action:
+                  - "iam:PassRole"
+                Resource:
+                  - !Sub arn:aws:iam::${AWS::AccountId}:role/analytics-ExecutionRole-*

@@ -1,9 +1,14 @@
 name: CI Deploy
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+
+# on:
+#   push:
+#     branches:
+#       - main
 
 jobs:
   deploy:
@@ -20,6 +25,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.DEPLOY_AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Deploy cicd resources
+        id: deploy-cicd
+        uses: aws-actions/aws-cloudformation-github-deploy@v1
+        with:
+          name: analytics-cicd
+          template: cicd.cloudformation.yml
+
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
@@ -27,13 +39,13 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ env.ECR_REPOSITORY }}
+          ECR_REPOSITORY: ${{ steps.deploy-cicd.outputs.AnalyticsEcrRepositoryName }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      
-      - name: Deploy to AWS CloudFormation
+
+      - name: Deploy app resources
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}

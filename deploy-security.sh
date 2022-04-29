@@ -3,11 +3,11 @@
 # Deploys AWS IAM-permissions CloudFormation stack.
 # Requires admin access to create/modify IAM roles.
 # This is manually created/updated, whereas the
-# rest of the cicd for this project is deployed
+# rest of the resources for this project are deployed
 # via GitHub Actions.
 
-STACK=${STACK-'analytics-cicd'}
-TEMPLATE=cicd.cloudformation.yml
+STACK=${STACK-'analytics-security'}
+TEMPLATE=security.cloudformation.yml
 
 
 echo Validating cloudformation template...
