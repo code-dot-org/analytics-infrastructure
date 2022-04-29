@@ -122,6 +122,13 @@ There are layers to the infrastructure for this project. The following describes
 
 To create the initial security resources, or update them with changes, have the Infrastructure Team execute the "[deploy-security.sh](deploy-security.sh)" script which will deploy the "[security.cloudformation.yml](security.cloudformation.yml)" Cloudformation Template.
 
+Once deployed, manually create an access token for the created user and paste the values into the following [GitHub Actions Secrets](https://github.com/code-dot-org/analytics-infrastructure/settings/secrets/actions) for this repository.
+
+- `DEPLOY_AWS_ACCESS_KEY_ID`
+- `DEPLOY_AWS_SECRET_ACCESS_KEY`
+
+These will ensure that the deployment actions can authenticate with AWS to execute Cloudformation deployments.
+
 ## Verification
 
 Upon creation of a Pull Request, and upon any subsequent commit to that Pull Request Branche, several verification steps will be performed. These are executed as GitHub Actions defined in the "[.github/workflows](.github/workflows)" directory. The following verifications occur:
