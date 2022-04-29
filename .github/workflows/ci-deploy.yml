@@ -1,14 +1,9 @@
 name: CI Deploy
 
 on:
-  pull_request:
+  push:
     branches:
       - main
-
-# on:
-#   push:
-#     branches:
-#       - main
 
 jobs:
   deploy:
