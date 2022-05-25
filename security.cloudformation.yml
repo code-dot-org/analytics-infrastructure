@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 
-Description: Cicd resources for analytics stack
+Description: Security resources for analytics stack
 
 Resources:  
   # This user will have a key and secret manually generated and saved to GitHub
