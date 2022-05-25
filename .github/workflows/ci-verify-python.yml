@@ -1,0 +1,36 @@
+name: CI Verify Python
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '**.py'
+      - 'pyproject.toml'
+      - 'poetry.lock'
+
+jobs:
+  verify-python:
+    runs-on: ubuntu-latest
+    env:
+      REDSHIFT_USERNAME: dbowie
+      REDSHIFT_PASSWORD: z1ggY
+      REDSHIFT_HOSTNAME: example.com
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v3
+      - uses: abatilo/actions-poetry@v2.0.0
+
+      - name: lint all python scripts
+        uses: py-actions/flake8@v2
+        with:
+          path: "src"
+          max-line-length: "100"
+
+      - name: Install python dependencies
+        working-directory: src
+        run: poetry install
+
+      - name: Run sample python script
+        working-directory: src
+        run: poetry run python test.py

@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: Cicd resources for analytics stack
+
+Resources:
+  EcrRepository:
+    Type: AWS::ECR::Repository
+    Properties: 
+      RepositoryName: !Sub ${AWS::StackName}
+
+Outputs:
+  AnalyticsEcrRepositoryName:
+    Description: ECR Repository for analytics docker images
+    Value: !Ref EcrRepository
+    Export: {Name: AnalyticsEcrRepositoryName}
