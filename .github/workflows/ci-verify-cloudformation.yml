@@ -4,8 +4,8 @@ on:
   pull_request:
     branches:
       - main
-    # paths:
-    #   - "**.cloudformation.yml"
+    paths:
+      - "**.cloudformation.yml"
 jobs:
   verify-cloudformation:
     runs-on: ubuntu-latest
