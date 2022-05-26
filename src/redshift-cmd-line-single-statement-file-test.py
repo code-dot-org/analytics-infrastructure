@@ -19,6 +19,13 @@ conn = redshift_connector.connect(
 # 2. read results into a pandas dataframe for printing results
 ############
 
+# Check that arg was given
+if(len(sys.argv)<2 or sys.argv[1].find('.sql') == -1):
+     print("\nMissing argument or not a .sql file.")
+     print("\nUSAGE: $poetry run python redshift-cmd-line-single-statement-file-test.py path/to/filename.sql\n")
+     exit()
+
+
 # open .sql file specified on command line and read it into a string variable
 f = open(sys.argv[1])
 query = f.read() 

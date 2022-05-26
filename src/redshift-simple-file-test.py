@@ -16,7 +16,7 @@ conn = redshift_connector.connect(
 
 # open an .sql file and read it into a string variable
 # assumption: simple_sql.sql has a single SQL command
-f = open("single-command.sql")
+f = open("../sql-files/single-command.sql")
 query = f.read() 
 f.close()
 

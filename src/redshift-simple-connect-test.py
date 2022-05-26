@@ -12,6 +12,6 @@ conn = redshift_connector.connect(
 
 )
 
-result = conn.cursor().execute("SELECT * FROM dashboard_production_pii.pd_survey_questions WHERE questions ILIKE '%taught%' LIMIT 100;")
+result = conn.cursor().execute("SELECT * FROM dashboard_production_pii.pd_survey_questions WHERE questions ILIKE '%taught%' LIMIT 10;")
 list = result.fetchall()
 print(list)

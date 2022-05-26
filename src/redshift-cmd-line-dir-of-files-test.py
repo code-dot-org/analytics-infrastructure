@@ -3,6 +3,7 @@ from config import Config
 import sys
 import pandas
 import glob
+import os
 
 CONFIG = Config()
 
@@ -61,6 +62,13 @@ def open_sql_and_process(filename):
 			print("Command skipped: ", command)
 	
 
+# Check that arg was given
+if(len(sys.argv)<2 or os.path.isdir(sys.argv[1]) is False ):
+     print("\nMissing argument OR arg given is NOT a directory")
+     print("Provide path to a directory with 1 or more .sql files in it.")
+     print("Every SQL statement in every .sql file in the provided directory will be exectued.")
+     print("\nUSAGE: $ poetry run python redshift-cmd-line-multi-statement-file-test.py path/to/dir/of/sql/files\n")
+     exit()
 
 # open dir of files
 sqlfiles = []

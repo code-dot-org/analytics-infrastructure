@@ -33,6 +33,14 @@ def run_and_display(sql_cmd):
 	print("---------------------------")
 
 
+# Check that arg was given
+if(len(sys.argv)<2 or sys.argv[1].find('.sql') == -1):
+     print("\nMissing argument or not a .sql file.")
+     print("Provide a file with 1 or more SQL statements in it, delimited by semi-colons")
+     print("USAGE: $ poetry run python redshift-cmd-line-multi-statement-file-test.py path/to/filename.sql\n")
+     exit()
+
+
 # open .sql file from command line and read it into a string variable
 f = open(sys.argv[1])
 sql_file = f.read() 
@@ -53,5 +61,3 @@ for command in sql_commands:
 		run_and_display(command)
 	except: 
 		print("Command skipped: ", command)
-
-
