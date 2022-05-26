@@ -22,6 +22,9 @@ Things I thought about while programming that I don't want to forget for later.
 	4. question: how to setup execution priority/ordering/dependencies?  Can do with with ordered folder or file names (hack).  Could setup a .yml file, or even a spreadsheet or (gasp) redshift table for it.  This sophistication/simplicity of this is crucial to get right.
 	5. SAVE THESE QUESTIONS UNTIL AFTER THE TOUR
 
+2. Tools?
+	* Sublime text + sublime merge?
+
 2. Setup/config
 	* from config import Config -- use this. 
 	* Test with **redshift-simple-connect-test.py**
