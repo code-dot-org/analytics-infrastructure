@@ -5,17 +5,7 @@ import pandas
 import glob
 import os
 
-CONFIG = Config()
-
-conn = redshift_connector.connect(
-     host=CONFIG.REDSHIFT_HOSTNAME,
-     database='dashboard',
-     user=CONFIG.REDSHIFT_USERNAME,
-     password=CONFIG.REDSHIFT_PASSWORD
-
-
-)
-
+############### HELPER FUNCTIONS #######################
 def run_and_display(sql_cmd):
 
 	r = conn.cursor().execute(sql_cmd)
@@ -60,19 +50,31 @@ def open_sql_and_process(filename):
 			run_and_display(command)
 		except: 
 			print("Command skipped: ", command)
-	
+
+##############################################################	
+
+CONFIG = Config()
+
+conn = redshift_connector.connect(
+     host=CONFIG.REDSHIFT_HOSTNAME,
+     database='dashboard',
+     user=CONFIG.REDSHIFT_USERNAME,
+     password=CONFIG.REDSHIFT_PASSWORD
+
+
+)
 
 # Check that arg was given
 if(len(sys.argv)<2 or os.path.isdir(sys.argv[1]) is False ):
      print("\nMissing argument OR arg given is NOT a directory")
      print("Provide path to a directory with 1 or more .sql files in it.")
      print("Every SQL statement in every .sql file in the provided directory will be exectued.")
-     print("\nUSAGE: $ poetry run python redshift-cmd-line-multi-statement-file-test.py path/to/dir/of/sql/files\n")
+     print("\nUSAGE: $ poetry run python redshift-cmd-line-multi-statement-file-test.py path/to/dir/of/sql/files/  (w/trailing slash\n")
      exit()
 
 # open dir of files
 sqlfiles = []
-dir = '../sql-files/' #todo read path from argv[1]
+dir = sys.argv[1]
 
 for file in glob.glob(dir+"*.sql"):
     sqlfiles.append(file)
