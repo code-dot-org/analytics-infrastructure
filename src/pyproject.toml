@@ -8,6 +8,7 @@ authors = ["Code.org"]
 python = "^3.9"
 redshift-connector = "^2.0.905"
 python-dotenv = "^0.20.0"
+pandas = "^1.4.2"
 
 [tool.poetry.dev-dependencies]
 

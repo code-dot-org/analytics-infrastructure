@@ -14,17 +14,22 @@ conn = redshift_connector.connect(
 
 )
 
-# open an .sql file and read it into a string variable
-# assumption: simple_sql.sql has a single SQL command
-f = open("single-command.sql")
+##########
+# 1. open sql file specified as command line arg.
+# 2. read results into a pandas dataframe for printing results
+############
+
+# open .sql file specified on command line and read it into a string variable
+f = open(sys.argv[1])
 query = f.read() 
 f.close()
 
-# execute the command and fetch all results as a plain string
-result = conn.cursor().execute(query)
-list = result.fetchall()
+# execute query and read into a pandas dataframe
+r = conn.cursor().execute(query)
+result: pandas.DataFrame = r.fetch_dataframe()
+
 
 print("----------QUERY----------")
 print(query)
 print("----------RESULTS----------")
-print(list)
+print(result)
