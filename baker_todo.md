@@ -26,6 +26,7 @@ Things I thought about while programming that I don't want to forget for later.
 	* Sublime text + sublime merge?
 
 2. Setup/config
+	* create .env file (in src directory)
 	* from config import Config -- use this. 
 	* Test with **redshift-simple-connect-test.py**
 
