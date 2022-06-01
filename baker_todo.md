@@ -13,7 +13,7 @@ Things I thought about while programming that I don't want to forget for later.
 * UPDATE output(s) to report sucess/failure conditions more succinctly.  We don't need or want to see the results of every query.  redshift-connector must have some functions for reporting these conditions.
 
 
-## The tour
+## The Tour
 
 1. Big picture (diagram: computer, github, ECS, redshift, cloudwatch).  
 	1. Multiple ways to execute code. local simulates ECS. ECS (via cloudformation?) has cronjob.  Can execute (single) python file on timer.  

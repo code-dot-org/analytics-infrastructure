@@ -4,17 +4,6 @@ import sys
 import pandas
 from redteamfuncs import run_and_display
 
-CONFIG = Config()
-
-conn = redshift_connector.connect(
-     host=CONFIG.REDSHIFT_HOSTNAME,
-     database='dashboard',
-     user=CONFIG.REDSHIFT_USERNAME,
-     password=CONFIG.REDSHIFT_PASSWORD
-
-
-)
-
 # def run_and_display(sql_cmd):
 
 # 	r = conn.cursor().execute(sql_cmd)
@@ -33,6 +22,17 @@ conn = redshift_connector.connect(
 
 # 	print("---------------------------")
 
+
+CONFIG = Config()
+
+conn = redshift_connector.connect(
+     host=CONFIG.REDSHIFT_HOSTNAME,
+     database='dashboard',
+     user=CONFIG.REDSHIFT_USERNAME,
+     password=CONFIG.REDSHIFT_PASSWORD
+
+
+)
 
 # Check that arg was given
 if(len(sys.argv)<2 or sys.argv[1].find('.sql') == -1):
