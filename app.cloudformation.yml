@@ -66,18 +66,19 @@ Resources:
         OperatingSystemFamily: LINUX
   
   # This isn't working yet, uncomment to see errors in cloudformation stack update
-  # TaskSchedule:
-  #   Type: AWS::Events::Rule
-  #   Properties:
-  #     Description: Trigger analytics task on a schedule
-  #     Name: !Sub "${AWS::StackName}-task-every-five-minutes"
-  #     ScheduleExpression: "cron(*/5 * * * )"
-  #     State: ENABLED
-  #     Targets:
-  #       - Id: !Sub "${AWS::StackName}-event-rule-targetId"
-  #         EcsParameters:
-  #           LaunchType: EC2
-  #           TaskDefinitionArn: !Ref TaskDefinition
-  #           TaskCount: 1
-  #         RoleArn: !GetAtt ExecutionRole.Arn
-  #         Arn: !GetAtt EcsCluster.Arn
+  TaskSchedule:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Trigger analytics task on a schedule
+      Name: !Sub "${AWS::StackName}-task-every-five-minutes"
+      RoleArn: !GetAtt ExecutionRole.Arn
+      ScheduleExpression: "cron(0/5 * * * ? *)"
+      State: ENABLED
+      Targets:
+        # add sns notify
+        - Id: !Sub "${AWS::StackName}-event-rule-target"
+          Arn: !GetAtt EcsCluster.Arn
+          RoleArn: !GetAtt ExecutionRole.Arn
+          EcsParameters:
+            TaskDefinitionArn: !Ref TaskDefinition
+            TaskCount: 1

@@ -26,6 +26,7 @@ Resources:
                   - ecr:InitiateLayerUpload
                   - ecr:UploadLayerPart
                   - ecr:CompleteLayerUpload
+                  - ecr:CreateRepository
                 Resource: !Sub arn:aws:ecr:${AWS::Region}:${AWS::AccountId}:repository/analytics-cicd
               - Effect: Allow
                 Action:
@@ -75,11 +76,11 @@ Resources:
                   - iam:PutRolePolicy
                   - iam:DeleteRolePolicy
                 NotResource: !Sub "arn:aws:iam::${AWS::AccountId}:role/admin/*"
-                # Require DevPermissions boundary on all Roles, e.g.:
+                # Require DevPermissions boundary on all Roles created by this user, e.g.:
                 # PermissionsBoundary: !ImportValue IAM-DevPermissions
-                # Condition:
-                #   StringEquals:
-                #     iam:PermissionsBoundary: !Ref DevPermissions
+                Condition:
+                  StringEquals:
+                    iam:PermissionsBoundary: !ImportValue IAM-DevPermissions
               - Effect: Allow
                 Action:
                   - "iam:PassRole"
